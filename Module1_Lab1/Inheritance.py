@@ -1,124 +1,93 @@
 class Person():
-    def __init__(self, firstname, lastname, emailaddress, phonenumber, age):
-        self.fname = firstname
-        self.lname = lastname
-        self.email = emailaddress
-        self.pnum = phonenumber
+    def __init__(self, name, email, phone, age):
+        self.name = name
+        self.email = email
+        self.phone = phone
         self.age = age
 
-    # prints name of person
     def getname(self):
-        print("    Name:  {} {}".format(self.fname, self.lname))
+        print(" Name:", self.name)
 
-    # age of person
     def getage(self):
-        print("    Age:  ", self.age)
-
-    # Phone number
+        print("Age:", self.age)
 
     def getnumber(self):
-        print("    Phone no: " + self.pnum)
+        print("Phoneno: " + self.phone)
 
-    # Email
     def getemail(self):
-        print("    Email:", self.email)
+        print("Email:", self.email)
 
 
-class FlightDetails():
-    def __init__(self, flight_num, flight_name):
-        self.flightnum = flight_num
+class FlightInfo():
+    def __init__(self, flight_number, flight_name, seat_number):
+        self.flightnumber = flight_number
         self.flightname = flight_name
+        self.seatnumber = seat_number
 
-    def getairlinesname(self):
-        print("    Airlines: ", self.flightname)
+    def getflightname(self):
+        print("Airlines:", self.flightname)
 
-    def getflightno(self):
-        print("    FlightNo:", self.flightnum)
+    def getflightnumber(self):
+        print("FlightNo:", self.flightnumber)
 
-
-class SeatingAllotment():
-
-    def __init__(self, seatnum, seatletter):
-        self.snum = seatnum
-        self.sletter = seatletter
-
-    def getseatinfo(self):
-        print("    Seating details:", self.snum, self.sletter)
+    def getseatnumber(self):
+        print("SeatNo:", self.seatnumber)
 
 
-class Booking(SeatingAllotment):
 
-    def __init__(self, travelclass, deptdate, source, destination, depttime, seatnum, seatletter):
-        SeatingAllotment.__init__(self, seatnum, seatletter)
-        self.travelclass = travelclass
-        self.deptdate = deptdate
+class Booking(FlightInfo):
+
+    def __init__(self, source, destination, deptdate,flight_number,flight_name,seat_number):
+        FlightInfo.__init__(self, flight_number, flight_name, seat_number)
         self.source = source
-        self.dest = destination
-        self.depttime = depttime
-        self.seatnum = seatnum
-        self.seatletter = seatletter
-
-    def gettravelclass(self):
-        print("    Class :", self.travelclass)
+        self.destination = destination
+        self.deptdate = deptdate
+        self.flightname = flight_name
+        self.flightnumber = flight_number
+        self.seatnumber = seat_number
 
     def getsource(self):
-        print("    Source :", self.source)
+        print("Source :", self.source)
 
-    def getdest(self):
-        print("    Destination :", self.dest)
+    def getdestination(self):
+        print("Destination :", self.destination)
 
-    def getdepttime(self):
-        print("    Department Time:", self.depttime)
-
-    def getdepdate(self):
-        print("    Departure Date:", self.deptdate)
+    def getdeptdate(self):
+        print("Departure Date:", self.deptdate)
 
 
-class Passenger(Person, FlightDetails, Booking):
+class Passenger(Person,Booking):
 
-    def __init__(self, firstname, lastname, emailaddress, phonenumber, age, flight_num,
-                 flight_name, travelclass, deptdate, depttime, source, destination, seatnum, seatletter):
-        # Super() keyword
-        super().__init__(firstname, lastname, emailaddress, phonenumber, age)  # super keyword used
-        # Calling the Booking class
-        Booking.__init__(self, travelclass, deptdate, source, destination, depttime, seatnum, seatletter)
-        # Calling the FlightDetails class
-        FlightDetails.__init__(self, flight_num, flight_name)
+    def __init__(self, name, email, phone, age, flight_number,
+                 flight_name, seat_number, deptdate, source, destination):
+
+        super().__init__(name, email, phone, age)
+
+        Booking.__init__(self, deptdate, source, destination, flight_number, flight_name, seat_number)
+     
+        FlightInfo.__init__(self, flight_number, flight_name, seat_number)
 
 
-# passing the parameters
-t = Passenger("Mallepudi", "Chaitanya", "chaitanya@gmail.com","8166063644", 24,"KLM354", "AirIndia", "Economy", "Mar 8th", "10:00", "USA", "India", 27,'A')
-print(" ____________________________________")
-print("|  Passenger Details:                |")
-print(" ____________________________________")
-t.getname()
-t.getemail()
-t.getage()
-t.getnumber()
-print(" ____________________________________")
-print("|  Flight Details:                   |")
-print(" ____________________________________")
+p = Passenger("Chaitanya", "chaitanya@gmail.com","8166063644", 24, "SPD100", "AirIndia","18C", "USA", "India", "18th March")
+print(" ____________________")
+print("|  Passenger Details:")
+print(" _____________________")
+p.getname()
+p.getemail()
+p.getage()
+p.getnumber()
+print(" _________________")
+print("  Flight Details ")
+print(" __________________")
 
-t.getairlinesname()
-t.getflightno()
-print(" ____________________________________")
-print("|  Booking Details:                   |")
-print(" ____________________________________")
-t.getsource()
-t.getdest()
-t.getdepdate()
-t.getdepttime()
-t.gettravelclass()
-t.getseatinfo()
-print("____________________________________")
+p.getflightname()
+p.getflightnumber()
+p.getseatnumber()
+print(" ___________________")
+print("|  Booking Details:|")
+print(" ____________________")
+p.getsource()
+p.getdestination()
+p.getdeptdate()
+print("_____________________")
 print("")
-print(" Creating instances of all classes and calling their member functions")
-booking = Booking("Business", "6/16/2018", "Hong Kong", "Chicago", "22.10", 2, "B")
-
-booking.gettravelclass()
-
-seat = SeatingAllotment(26, "C")
-seat.getseatinfo()
-
-person = Person("Chaitu", "Mallepudi", "chaitu@gmail.com", "557-899-87890", 23)
-person.getage()
