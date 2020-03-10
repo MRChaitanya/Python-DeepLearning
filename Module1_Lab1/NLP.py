@@ -28,12 +28,22 @@ from nltk.util import ngrams
 
 token = nltk.word_tokenize(string)
 
-for s in stokens[:50]:
+for s in stokens[:100]:
     trigrams = list(ngrams(token, 3))
     print("The text:", s, "\ntrigrams", trigrams)
 
-from nltk import word_tokenize, pos_tag, ne_chunk
+wordfreq = nltk.FreqDist(trigrams)
+mostcommon = wordfreq.most_common(10)
+print("Most frequently repeated top 10 trigrams:", mostcommon)
 
-for s in stokens[:50]:
-    print(ne_chunk(pos_tag(word_tokenize(s))))
-Lstemmer = nltk.LancasterStemmer()
+sentTokens = nltk.sent_tokenize(string)
+concatenatedArray = []
+for sentence in sentTokens:
+    for a,b,c in trigrams:
+        for ((d,e,f),length) in mostcommon:
+            if(a == d,e,f):
+                concatenatedArray.append(sentence)
+print("Concatenated sentenced is:", concatenatedArray)
+print("Maximum of concatenated is ", max(concatenatedArray))
+
+
