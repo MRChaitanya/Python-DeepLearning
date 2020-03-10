@@ -14,8 +14,8 @@ x4 = x4.dropna()
 
 y = x4.isnull().values.any()
 print(y)
-X_train = x4.drop('Confirmed', axis=1)
-Y_train = x4['Confirmed']
+X_train = x4.drop('Deaths', axis=1)
+Y_train = x4['Deaths']
 
 regr = linear_model.LinearRegression()
 

@@ -1,7 +1,7 @@
 from pip._vendor.distlib.compat import raw_input
 
 
-def printPowerSet(arr, n):
+def SuperSet(arr, n):
     _list = []
 
     for i in range(2 ** n):
@@ -16,8 +16,6 @@ def printPowerSet(arr, n):
             _list.append(subset)
 
     for subset in _list:
-
-
         arr = subset.split('|')
         for string in arr:
             print(string, end=" ")
@@ -30,4 +28,4 @@ elem = int(raw_input("insert how many elements you want:"))
 for i in range(0, elem):
     arr.append(int(raw_input("Enter next number :")))
 n = len(arr)
-printPowerSet(arr, n)
+SuperSet(arr, n)
