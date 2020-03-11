@@ -1,6 +1,3 @@
-from bs4 import BeautifulSoup
-import requests
-
 file = open("nlp_input.txt", "r")
 string = file.read()
 import nltk
@@ -21,14 +18,14 @@ for k in tagged:
 from nltk.stem import WordNetLemmatizer
 
 lemmatizer = WordNetLemmatizer()
-for t in wtokens[:100]:
+for t in wtokens[:10]:
     print("Lemmatizer:", lemmatizer.lemmatize(t), ",    With POS=n:", lemmatizer.lemmatize(t, pos="n"))
 
 from nltk.util import ngrams
 
 token = nltk.word_tokenize(string)
 
-for s in stokens[:100]:
+for s in stokens[:10]:
     trigrams = list(ngrams(token, 3))
     print("The text:", s, "\ntrigrams", trigrams)
 
@@ -39,11 +36,9 @@ print("Most frequently repeated top 10 trigrams:", mostcommon)
 sentTokens = nltk.sent_tokenize(string)
 concatenatedArray = []
 for sentence in sentTokens:
-    for a,b,c in trigrams:
-        for ((d,e,f),length) in mostcommon:
-            if(a == d,e,f):
+    for (i, j, k) in trigrams:
+        for ((l, m, n), length) in mostcommon:
+            if (i,j,k == l, m, n):
                 concatenatedArray.append(sentence)
-print("Concatenated sentenced is:", concatenatedArray)
-print("Maximum of concatenated is ", max(concatenatedArray))
 
-
+print("\nConcatenated sentenced is:", concatenatedArray)

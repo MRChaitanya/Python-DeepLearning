@@ -9,11 +9,13 @@ x1 = data.drop('Date', axis=1)
 x2 = x1.drop('Last Update', axis=1)
 x3 = x2.drop('Country', axis=1)
 x4 = x3.drop('Province/State', axis=1)
+
 x4 = x4.drop_duplicates()
 x4 = x4.dropna()
 x4 = x4.drop("Deaths", axis=1)
 y = x4.isnull().values.any()
 print(y)
+
 
 
 from sklearn.neighbors import KNeighborsClassifier

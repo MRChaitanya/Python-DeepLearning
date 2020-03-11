@@ -44,7 +44,7 @@ scaler.fit(x)
 x_scaled_array = scaler.transform(x)
 x_scaled = pd.DataFrame(x_scaled_array)
 feature_scaling_score = metrics.silhouette_score(x_scaled, y_cluster_kmeans)
-print(feature_scaling_score)
+print("Feature scaling score:", feature_scaling_score)
 
 from sklearn.decomposition import PCA
 
@@ -57,6 +57,10 @@ kmeans_1 = km_1.predict(x_pca)
 
 y_cluster_kmeans_1 = km_1.predict(x_pca)
 
+pca_score = metrics.silhouette_score(x_pca, y_cluster_kmeans_1)
+print("Pca Score:",pca_score)
+
+
 
 import matplotlib.pyplot as plt
 
@@ -66,14 +70,12 @@ plt.xlabel('Number of Clusters')
 plt.ylabel('Wcss')
 plt.show()
 
-plt.scatter(y_cluster_kmeans, scores, alpha=.75,
-            color='b')
+plt.scatter(y_cluster_kmeans, scores, alpha=.75,color='b')
 plt.xlabel('Cluster')
 plt.ylabel('Scores')
 plt.show()
 
-plt.scatter(range(1, len(y_cluster_kmeans) + 1), y_cluster_kmeans, alpha=.75,
-            color='b')
+plt.scatter(range(1, len(y_cluster_kmeans) + 1), y_cluster_kmeans, alpha=.75,color='b')
 plt.xlabel('Id')
 plt.ylabel('Cluster')
 plt.show()

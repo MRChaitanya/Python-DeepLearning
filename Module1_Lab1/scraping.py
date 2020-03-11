@@ -4,16 +4,10 @@ import requests
 URL = 'https://catalog.umkc.edu/course-offerings/graduate/comp-sci/'
 page = requests.get(URL)
 soup = BeautifulSoup(page.content, 'html.parser')
-
-x = soup.find_all('title')
-print(x)
-
-y = soup.findAll('span')
-print(y)
-
-z = soup.findAll('p')
-print(z)
-
-for link in soup.findAll('a'):
-    print(link.get('href'))
-
+# print(page.text)
+course_title = soup.findAll('span', {'class': 'title'})
+course_overview = soup.findAll('p', {'class': 'courseblockdesc'})
+for text in range(len(course_title)):
+    print(course_title[text].text)
+    print(course_overview[text].text)
+    print('\n')
